@@ -5,11 +5,12 @@ import { useFormik } from "formik";
 import Joi from "joi";
 import formikValidate from "../functions/formikvalidateJoi";
 import { createUser } from "../services/userService";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuth } from "../context/authContext";
 const SignUp = ({ redirect }) => {
   const navigate = useNavigate();
-
+  const { user } = useAuth();
   const [error, setError] = useState("");
   const form = useFormik({
     validateOnMount: true,
@@ -22,6 +23,8 @@ const SignUp = ({ redirect }) => {
     validate: formikValidate({
       name: Joi.string().min(6).max(25).required(),
       email: Joi.string()
+        .min(6)
+        .max(255)
         .email({ tlds: { allow: false } })
         .required(),
       password: Joi.string().min(6).max(255).required(),
@@ -49,7 +52,9 @@ const SignUp = ({ redirect }) => {
       }
     },
   });
-
+  if (user) {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <PageHeader title="Sign Up Page" description="Create your user account" />

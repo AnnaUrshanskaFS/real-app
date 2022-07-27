@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
-
+import { useAuth } from "../context/authContext";
 const Navbar = () => {
+  const { user, logout } = useAuth();
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <div className="container">
@@ -27,30 +28,42 @@ const Navbar = () => {
                 About
               </NavLink>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                My Cards
-              </a>
-            </li>
+            {user?.biz && (
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  My Cards
+                </a>
+              </li>
+            )}
           </ul>
 
           <ul className="navbar-nav ms-auto mb-2 mb-sm-0">
-            <li className="nav-item">
-              <NavLink to="signin" className="nav-link">
-                Sign In
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="signup" className="nav-link">
-                Sign Up
-              </NavLink>
-            </li>
+            {user ? (
+              <li className="nav-item">
+                <NavLink to="signout" className="nav-link">
+                  Sign Out
+                </NavLink>
+              </li>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <NavLink to="signin" className="nav-link">
+                    Sign In
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="signup" className="nav-link">
+                    Sign Up
+                  </NavLink>
+                </li>
 
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Buisness
-              </a>
-            </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
+                    Buisness
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

@@ -8,6 +8,7 @@ import SignUp from "./components/signUp";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SignIn from "./components/signIn";
+import Logout from "./components/logout";
 function App() {
   return (
     <div className="app d-flex flex-column min-vh-100">
@@ -29,8 +30,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="signup" element={<SignUp redirect="/" />} />
-          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp redirect="/signin" />} />
+          <Route path="signin" element={<SignIn redirect="/" />} />
+          <Route path="signout" element={<Logout redirect="/" />} />
         </Routes>
       </main>
       <footer className="">
