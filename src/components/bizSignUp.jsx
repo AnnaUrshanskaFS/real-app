@@ -8,9 +8,9 @@ import { createUser } from "../services/userService";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/authContext";
-const SignUp = ({ redirect }) => {
+const SignUpBiz = ({ redirect }) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, login } = useAuth();
   const [error, setError] = useState("");
   const form = useFormik({
     validateOnMount: true,
@@ -32,7 +32,8 @@ const SignUp = ({ redirect }) => {
 
     async onSubmit(values) {
       try {
-        await createUser({ ...values, biz: false });
+        await createUser({ ...values, biz: true });
+        await login({ email: values.email, password: values.password });
         toast.success("You are signed up", {
           position: "top-right",
           autoClose: 5000,
@@ -57,7 +58,10 @@ const SignUp = ({ redirect }) => {
   }
   return (
     <>
-      <PageHeader title="Sign Up Page" description="Create your user account" />
+      <PageHeader
+        title="Sign Up Buiseness Page"
+        description="Create your buiseness account"
+      />
       <form noValidate autoComplete="off" onSubmit={form.handleSubmit}>
         {error && <div className="alert alert-danger">{error}</div>}
 
@@ -91,7 +95,7 @@ const SignUp = ({ redirect }) => {
             type="submit"
             className=" btn btn-outline-primary"
           >
-            Sign Up Biz
+            Sign Up
           </button>
         </div>
       </form>
@@ -99,4 +103,4 @@ const SignUp = ({ redirect }) => {
   );
 };
 
-export default SignUp;
+export default SignUpBiz;

@@ -1,15 +1,11 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { createContext, useContext } from "react";
 import userService from "../services/userService";
 export const authContext = createContext(null);
 authContext.displayName = "auth-context";
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(userService.getUser());
 
-  useEffect(() => {
-    refreshUser();
-  }, []);
   const refreshUser = () => {
     setUser(userService.getUser());
   };

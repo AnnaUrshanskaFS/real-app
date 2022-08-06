@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 /* import { useNavigate } from "react-router-dom"; */
 import formikValidate from "../functions/formikvalidateJoi";
 import { Navigate, useNavigate } from "react-router-dom";
-import Input from "./input";
+import Input from "./common/input";
 import { toast } from "react-toastify";
 import Joi from "joi";
 

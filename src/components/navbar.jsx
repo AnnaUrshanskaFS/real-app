@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <div className="container">
@@ -30,9 +30,9 @@ const Navbar = () => {
             </li>
             {user?.biz && (
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <NavLink to="my-cards" className="nav-link">
                   My Cards
-                </a>
+                </NavLink>
               </li>
             )}
           </ul>
@@ -58,9 +58,9 @@ const Navbar = () => {
                 </li>
 
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Buisness
-                  </a>
+                  <NavLink to="signupBiz" className="nav-link">
+                    Sign Up Buiseness
+                  </NavLink>
                 </li>
               </>
             )}
